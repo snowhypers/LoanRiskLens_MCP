@@ -6,7 +6,9 @@ const logger = require('shared/utils/logger');
 async function main() {
   try {
     const server = await createMCPServer({
-      port: parseInt(process.env.PORT || process.env.MCP_PORT || '3001', 10),
+      // Local API and MCP processes share .env, so prefer MCP_PORT locally.
+      // Render supplies PORT and MCP_PORT is intentionally left unset there.
+      port: parseInt(process.env.MCP_PORT || process.env.PORT || '3001', 10),
       host: process.env.HOST || process.env.MCP_HOST || '0.0.0.0',
     });
 

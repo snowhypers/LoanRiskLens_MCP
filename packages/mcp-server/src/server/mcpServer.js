@@ -6,6 +6,7 @@ const config = require('shared/config');
 const db = require('shared/database');
 const logger = require('shared/utils/logger');
 const { TOOL_DEFINITIONS, executeTool } = require('../tools/creditTools');
+const { requireMcpSecret } = require('../auth/sharedSecretAuth');
 
 /**
  * Alternative Credit Intelligence MCP Server
@@ -36,7 +37,7 @@ class AltCreditMCPServer {
     this.expressApp.use((req, res, next) => {
       res.header('Access-Control-Allow-Origin', '*');
       res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-      res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+      res.header('Access-Control-Allow-Headers', 'Content-Type, X-MCP-Secret');
       if (req.method === 'OPTIONS') {
         return res.sendStatus(204);
       }
@@ -54,7 +55,7 @@ class AltCreditMCPServer {
     });
 
     // MCP protocol endpoint
-    this.expressApp.post('/mcp', async (req, res) => {
+    this.expressApp.post('/mcp', requireMcpSecret, async (req, res) => {
       // Guard against missing/malformed body
       if (!req.body || typeof req.body !== 'object') {
         return res.status(400).json({
@@ -231,7 +232,7 @@ async function createMCPServer(options = {}) {
 // Run as standalone server
 async function main() {
   const server = await createMCPServer({
-    port: parseInt(process.env.PORT || process.env.MCP_PORT || '3001', 10),
+    port: parseInt(process.env.MCP_PORT || process.env.PORT || '3001', 10),
     host: process.env.HOST || process.env.MCP_HOST || '0.0.0.0',
   });
 

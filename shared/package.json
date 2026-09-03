@@ -1,15 +1,12 @@
 {
   "name": "shared",
   "version": "1.0.0",
-  "main": "src/index.js",
   "exports": {
-    ".": "./src/index.js",
     "./config": "./src/config/index.js",
     "./database": "./src/database/index.js",
     "./utils/logger": "./src/utils/logger.js",
     "./utils/helpers": "./src/utils/helpers.js",
-    "./utils/validator": "./src/utils/validator.js",
-    "./types": "./src/types/index.js"
+    "./utils/validator": "./src/utils/validator.js"
   },
   "scripts": {
     "test": "jest"

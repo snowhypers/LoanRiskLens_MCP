@@ -267,7 +267,8 @@ Output shape:
 
 ## Demo Users
 
-The CSV demo dataset contains five underwriting scenarios:
+Use these five synthetic underwriting scenarios after importing equivalent
+records into the connected database:
 
 | User | Expected Result |
 | --- | --- |
@@ -277,14 +278,8 @@ The CSV demo dataset contains five underwriting scenarios:
 | Ravi Sharma | `HIGH`, `REJECTED` |
 | Sanjay Gupta | `LOW`, `APPROVED` |
 
-To load these into the connected database:
-
-```bash
-npm run seed:dry-run
-npm run seed
-```
-
-If these users are not found by API/MCP, the app is connected to a different database or the seed command has not been run.
+If these users are not found by API/MCP, the app is connected to a different
+database or the records have not been imported.
 
 ## Example Demo Questions
 
@@ -446,13 +441,6 @@ Install and test:
 ```bash
 npm install
 npm test
-```
-
-Seed demo data:
-
-```bash
-npm run seed:dry-run
-npm run seed
 ```
 
 Start API:

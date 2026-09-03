@@ -291,8 +291,7 @@ erDiagram
 graph TB
     subgraph DEV["Local Development"]
         CODE["Source Code"]
-        CSV["CSV Datasets\nusers · transactions · savings"]
-        SEED["npm run seed"]
+        DATA["Imported synthetic data\nor approved production data"]
     end
 
     subgraph GH["GitHub"]
@@ -393,8 +392,8 @@ npm install
 cp .env.example .env
 # Edit .env — set DB_HOST, DB_NAME, DB_USER, DB_PASSWORD
 
-# 3. Initialize schema and seed demo data
-npm run seed
+# 3. Import your synthetic or approved data into PostgreSQL/Supabase.
+# Schema creation runs automatically when the API or MCP server starts.
 
 # 4. Start API server (port 3000)
 npm run dev
@@ -430,8 +429,6 @@ LoanRiskLens_MCP/
 │   ├── src/config/             # App configuration
 │   ├── src/database/           # pg Pool + schema init
 │   └── src/utils/              # helpers, logger, validator
-├── scripts/
-│   └── seed-datasets.js        # CSV → PostgreSQL seed script
 └── docs/                       # Documentation
 ```
 
@@ -464,7 +461,7 @@ LoanRiskLens_MCP/
 | [LangGraph Workflows](docs/LANGGRAPH.md) | Agent pipeline details |
 | [MCP Integration](docs/MCP_INTEGRATION.md) | MCP server integration guide |
 | [API Documentation](docs/API.md) | Full API reference |
+## License
 
----
-
+MIT © 2024 LoanRiskLens
 

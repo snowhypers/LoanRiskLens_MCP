@@ -11,10 +11,7 @@
     "shared"
   ],
   "scripts": {
-    "build": "npm run build --workspaces",
     "test": "npm run test --workspaces",
-    "seed": "NODE_PATH=. node scripts/seed-datasets.js",
-    "seed:dry-run": "NODE_PATH=. node scripts/seed-datasets.js --dry-run",
     "dev": "NODE_PATH=. node apps/api/src/index.js",
     "dev:mcp": "NODE_PATH=. node packages/mcp-server/src/index.js"
   },

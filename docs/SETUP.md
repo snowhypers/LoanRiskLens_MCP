@@ -68,18 +68,11 @@
    CREATE DATABASE altcredit_db;
    ```
 
-5. **Validate and seed demo datasets**
-   ```bash
-   npm run seed:dry-run
-   npm run seed
-   ```
+5. **Load data into PostgreSQL/Supabase**
 
-   This imports:
-   - `users_dataset.csv`
-   - `transactions_dataset.csv`
-   - `savings_dataset.csv`
-
-   The seed command is idempotent. You can run it again after changing CSV data; existing UUID rows will be updated.
+   Import approved synthetic or production records using your database import
+   workflow. The API and MCP server create the schema automatically at startup,
+   but this repository does not include CSV seed files.
 
 6. **Start the API server**
    ```bash
@@ -96,17 +89,6 @@
 ```bash
 npm test
 ```
-
-### Seeding Demo Data
-
-Use this after creating the database locally or after deploying a fresh database:
-
-```bash
-npm run seed:dry-run
-npm run seed
-```
-
-`seed:dry-run` validates CSV format and relationships without writing to the database. `seed` creates the schema if needed and upserts all demo records.
 
 ### Project Structure
 

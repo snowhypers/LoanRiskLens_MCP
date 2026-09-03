@@ -42,6 +42,7 @@ const config = {
     port: parseInt(process.env.MCP_PORT || '3001'),
     name: 'AltCredit Intelligence MCP Server',
     version: '1.0.0',
+    secret: process.env.MCP_SECRET,
   },
 
   // Credit scoring weights

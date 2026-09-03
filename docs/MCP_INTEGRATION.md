@@ -22,6 +22,24 @@ POST http://localhost:3001/mcp
 GET http://localhost:3001/health
 ```
 
+## Authentication
+
+Every request to `POST /mcp` must include the same secret configured on the
+server as `MCP_SECRET`. The client stores its matching value in its own
+`MCP_CLIENT_SECRET` environment variable and sends it in the `X-MCP-Secret`
+header. `MCP_CLIENT_SECRET` is a client-side convention; the server only reads
+`MCP_SECRET`.
+
+```bash
+curl -X POST http://localhost:3001/mcp \
+  -H "Content-Type: application/json" \
+  -H "X-MCP-Secret: $MCP_CLIENT_SECRET" \
+  -d '{"jsonrpc":"2.0","method":"tools/list","id":1}'
+```
+
+Requests with a missing or incorrect secret receive HTTP `401`. Keep both
+environment variables private; never place the secret in source code.
+
 ### Initialize Connection
 
 ```json

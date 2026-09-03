@@ -85,7 +85,7 @@
 | Key | Value |
 |-----|-------|
 | `NODE_ENV` | `production` |
-| `MCP_PORT` | `10001` |
+| `MCP_SECRET` | long random shared secret; do not commit it |
 | `DB_HOST` | paste from Step 1 |
 | `DB_PORT` | `5432` |
 | `DB_NAME` | `altcredit_db` |
@@ -107,36 +107,17 @@ curl https://altcredit-api.onrender.com/api/health
 ```bash
 curl -X POST https://altcredit-mcp.onrender.com/mcp \
   -H "Content-Type: application/json" \
+  -H "X-MCP-Secret: $MCP_CLIENT_SECRET" \
   -d '{"jsonrpc": "2.0", "method": "tools/list", "id": 1}'
 ```
 
 ---
 
-## Step 5: Seed Demo Underwriting Data
+## Step 5: Load Underwriting Data
 
-After the API has successfully deployed once, seed the CSV demo users into the production database.
-
-### Option A: Render Shell
-
-1. Open the `altcredit-api` service in Render.
-2. Go to **Shell**.
-3. Run:
-
-```bash
-npm run seed:dry-run
-npm run seed
-```
-
-### Option B: Local Machine Against Production DB
-
-Set `DATABASE_URL` locally to the same production database URL and run:
-
-```bash
-npm run seed:dry-run
-npm run seed
-```
-
-The seed command is idempotent. It upserts records by UUID, so it is safe to rerun after updating the CSV files.
+Import approved synthetic or production records into Supabase before using the
+underwriting tools. The API and MCP service create the schema at startup, but
+they do not import CSV files automatically.
 
 ---
 
