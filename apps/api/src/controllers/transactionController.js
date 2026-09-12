@@ -1,6 +1,6 @@
 // Transaction Controller
 
-const transactionService = require('../services/transactionService');
+const transactionService = require('@loan-risk-lens/application/services/transaction');
 const { validate, createTransactionSchema, transactionQuerySchema } = require('shared/utils/validator');
 const { asyncHandler } = require('../middleware/errorHandler');
 const logger = require('shared/utils/logger');

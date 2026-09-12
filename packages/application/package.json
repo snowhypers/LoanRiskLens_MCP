@@ -1,0 +1,22 @@
+{
+  "name": "@loan-risk-lens/application",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./services/credit": "./src/services/creditService.js",
+    "./services/savings": "./src/services/savingsService.js",
+    "./services/transaction": "./src/services/transactionService.js"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "@loan-risk-lens/infrastructure": "1.0.0",
+    "@loan-risk-lens/domain": "1.0.0",
+    "shared": "1.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

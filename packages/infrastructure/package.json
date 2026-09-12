@@ -1,0 +1,19 @@
+{
+  "name": "@loan-risk-lens/infrastructure",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./repositories/report": "./src/repositories/reportRepository.js",
+    "./repositories/savings": "./src/repositories/savingsRepository.js",
+    "./repositories/transaction": "./src/repositories/transactionRepository.js",
+    "./repositories/user": "./src/repositories/userRepository.js"
+  },
+  "scripts": {
+    "test": "jest --passWithNoTests"
+  },
+  "dependencies": {
+    "shared": "1.0.0",
+    "uuid": "^9.0.1"
+  }
+}

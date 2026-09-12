@@ -73,7 +73,7 @@ PostgreSQL database (local or Supabase) with optimized schema and indexes.
 **Important**: MCP Server depends on REST API services.
 
 ```
-MCP Server → CreditService (from apps/api) → Repositories → PostgreSQL
+MCP Server → Application services → Repositories → PostgreSQL
 ```
 
 For MCP to work, REST API must also be deployed.

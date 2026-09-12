@@ -1,6 +1,6 @@
 // User Controller
 
-const userRepository = require('../repositories/userRepository');
+const userRepository = require('@loan-risk-lens/infrastructure/repositories/user');
 const { validate, createUserSchema, userIdSchema } = require('shared/utils/validator');
 const { asyncHandler } = require('../middleware/errorHandler');
 const { generateToken } = require('../middleware/auth');

@@ -94,7 +94,7 @@ T2["Analyze Financial Behavior"]
 T3["Generate Underwriting Report"]
 end
 
-subgraph GRAPH["LangGraph Multi-Agent Workflow"]
+subgraph GRAPH["LangGraph Multi-Agent Workflow (demo/reference — runtime path is creditService)"]
 
 direction TB
 
@@ -410,25 +410,18 @@ npm test
 ```
 LoanRiskLens_MCP/
 ├── apps/
-│   └── api/                    # Express REST API (port 3000)
+│   ├── api/                    # Express REST API (port 3000)
 │       ├── src/controllers/    # Route handlers
-│       ├── src/services/       # Business logic (creditService, etc.)
-│       ├── src/repositories/   # DB access layer
 │       └── src/middleware/     # Auth, security, error handling
-├── packages/
 │   └── mcp-server/             # HTTP JSON-RPC MCP Server (port 3001)
 │       ├── src/server/         # mcpServer.js — JSON-RPC router
 │       └── src/tools/          # creditTools.js — tool definitions
-├── credit-engine/              # Pure scoring & analysis logic
-│   ├── src/scoring/            # Score calculators
-│   └── src/analysis/           # Risk classifier, profile analyzer
-├── langgraph-workflows/        # 6-agent sequential workflow
-│   ├── src/agents/             # Individual agent classes
-│   └── src/workflows/          # CreditIntelligenceWorkflow
-├── shared/                     # Common modules
-│   ├── src/config/             # App configuration
-│   ├── src/database/           # pg Pool + schema init
-│   └── src/utils/              # helpers, logger, validator
+├── packages/
+│   ├── application/             # Reusable credit, savings, and transaction use-cases
+│   ├── domain/                  # Pure scoring and risk-analysis logic
+│   ├── infrastructure/          # PostgreSQL repository implementations
+│   ├── shared/                  # Config, database, logging, validation, helpers
+│   └── workflows/               # Six-agent DEMO orchestration (not wired at runtime — see packages/workflows/README.md)
 └── docs/                       # Documentation
 ```
 
@@ -441,7 +434,7 @@ LoanRiskLens_MCP/
 | Runtime | Node.js 18+ |
 | API Framework | Express.js |
 | Protocol | MCP (Model Context Protocol) — HTTP JSON-RPC 2.0 |
-| Agent Workflow | LangGraph-style 6-agent pipeline |
+| Agent Workflow | LangGraph-style 6-agent pipeline — demo/reference; the runtime path is `creditService` |
 | Database | PostgreSQL (Supabase hosted) |
 | Authentication | JWT + RBAC |
 | Validation | Joi |
@@ -464,4 +457,3 @@ LoanRiskLens_MCP/
 ## License
 
 MIT © 2024 LoanRiskLens
-

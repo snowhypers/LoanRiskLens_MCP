@@ -49,9 +49,9 @@ Rajesh Kumar owns a small grocery shop. He has no CIBIL history, but he has stab
 The repo is a Node.js monorepo with these main parts:
 
 - `apps/api`: Express REST API
-- `packages/mcp-server`: HTTP JSON-RPC MCP server
-- `credit-engine`: rule-based scoring and behavior analysis
-- `langgraph-workflows`: sequential agent workflow
+- `apps/mcp-server`: HTTP JSON-RPC MCP server
+- `packages/domain`: rule-based scoring and behavior analysis
+- `packages/workflows`: sequential agent workflow
 - `shared`: config, database, helpers, validation
 - `docs`: setup, deployment, API, MCP, and architecture docs
 

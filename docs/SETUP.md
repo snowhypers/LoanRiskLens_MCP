@@ -92,38 +92,52 @@ npm test
 
 ### Project Structure
 
+npm-workspaces monorepo. Dependency direction: `apps → application → domain/infrastructure → shared`.
+
 ```
-/apps
-  /api                    # Express.js REST API
-    /src
-      /controllers        # Route controllers
-      /services           # Business logic
-      /repositories       # Database operations
-      /middleware         # Auth, error handling, security
-      /routes             # Express routers
-      /validators         # Request validation schemas
-      /utils              # Helper utilities
-    /tests                # API tests
-/packages
-  /mcp-server            # MCP Server implementation
-    /src
-      /tools              # MCP tool definitions
-      /server             # MCP server core
-/langgraph-workflows     # LangGraph workflow agents
-  /src
-    /agents               # Analysis agents
-    /workflows            # Workflow definitions
-/credit-engine           # Credit scoring engine
-  /src
-    /scoring              # Scoring algorithms
-    /analysis             # Analysis functions
-/shared                  # Shared code across packages
-  /src
-    /config               # Configuration
-    /database              # Database utilities
-    /types                 # Type definitions
-    /utils                 # Utility functions
-/docs                    # Documentation
+LoanRiskLens_MCP/
+├── package.json                 # npm workspaces root (7 workspaces)
+├── .env / .env.example          # DATABASE_URL, JWT_SECRET, MCP_SECRET, ports
+├── docs/                        # Documentation (7 guides)
+├── apps/
+│   ├── api/                     # Express REST API (port 3000)
+│   │   ├── src/
+│   │   │   ├── controllers/     # Route handlers (credit, user, transaction, savings)
+│   │   │   ├── middleware/      # auth.js (JWT + RBAC), security.js, errorHandler.js
+│   │   │   ├── routes/          # Express routers
+│   │   │   └── index.js         # App bootstrap + middleware chain
+│   │   └── tests/               # API tests (Jest)
+│   └── mcp-server/              # MCP JSON-RPC 2.0 server (port 3001)
+│       ├── src/
+│       │   ├── auth/            # sharedSecretAuth.js (X-MCP-Secret check)
+│       │   ├── server/          # mcpServer.js — JSON-RPC router
+│       │   ├── tools/           # creditTools.js — 3 MCP tools + formatters
+│       │   └── index.js         # Server bootstrap
+│       └── tests/               # MCP server tests
+└── packages/
+    ├── application/             # @loan-risk-lens/application — use-case services
+    │   ├── src/services/        # creditService, transactionService, savingsService
+    │   └── tests/
+    ├── domain/                  # @loan-risk-lens/domain — pure scoring, no DB calls
+    │   ├── src/
+    │   │   ├── scoring/         # Component scores + weighted overall + credit score
+    │   │   └── analysis/        # Savings profiles, risk classification, behavior
+    │   └── tests/               # Includes 5 business-scenario personas
+    ├── infrastructure/          # @loan-risk-lens/infrastructure — SQL only
+    │   └── src/repositories/    # user, transaction, savings, report repositories
+    ├── shared/                  # shared — cross-cutting utilities
+    │   ├── src/
+    │   │   ├── config/          # ⭐ single source for scoring weights/thresholds
+    │   │   ├── database/        # pg pool + initializeSchema()
+    │   │   └── utils/           # logger (winston), helpers, validator (Joi)
+    │   └── tests/
+    └── workflows/               # @loan-risk-lens/workflows — DEMO only
+        ├── src/
+        │   ├── agents/          # 6 agents (transaction, savings, behavior,
+        │   │                    #  risk, decision, explanation)
+        │   └── workflows/       # creditIntelligenceWorkflow.js
+        ├── tests/               # Pinned 5-scenario workflow tests
+        └── README.md            # Why this package is NOT wired at runtime
 ```
 
 ### API Endpoints

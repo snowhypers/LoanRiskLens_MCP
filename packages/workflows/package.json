@@ -1,0 +1,17 @@
+{
+  "name": "@loan-risk-lens/workflows",
+  "version": "1.0.0",
+  "description": "DEMO/reference orchestration of the credit intelligence agents. NOT wired at runtime — the API and MCP server use creditService (@loan-risk-lens/application). Both paths share the same domain scoring engine (@loan-risk-lens/domain/scoring).",
+  "main": "src/index.js",
+  "dependencies": {
+    "@loan-risk-lens/application": "1.0.0",
+    "@loan-risk-lens/domain": "1.0.0",
+    "shared": "1.0.0"
+  },
+  "scripts": {
+    "test": "jest --passWithNoTests"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

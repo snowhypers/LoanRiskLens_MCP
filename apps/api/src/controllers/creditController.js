@@ -1,6 +1,6 @@
 // Credit Controller - Main creditworthiness analysis endpoints
 
-const creditService = require('../services/creditService');
+const creditService = require('@loan-risk-lens/application/services/credit');
 const { validate, creditworthinessSchema, financialBehaviorSchema, userIdSchema } = require('shared/utils/validator');
 const { asyncHandler } = require('../middleware/errorHandler');
 const logger = require('shared/utils/logger');

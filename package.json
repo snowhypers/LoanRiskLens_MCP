@@ -5,15 +5,17 @@
   "private": true,
   "workspaces": [
     "apps/api",
-    "packages/mcp-server",
-    "langgraph-workflows",
-    "credit-engine",
-    "shared"
+    "apps/mcp-server",
+    "packages/application",
+    "packages/domain",
+    "packages/infrastructure",
+    "packages/shared",
+    "packages/workflows"
   ],
   "scripts": {
     "test": "npm run test --workspaces",
-    "dev": "NODE_PATH=. node apps/api/src/index.js",
-    "dev:mcp": "NODE_PATH=. node packages/mcp-server/src/index.js"
+    "dev": "node apps/api/src/index.js",
+    "dev:mcp": "node apps/mcp-server/src/index.js"
   },
   "engines": {
     "node": ">=18.0.0"

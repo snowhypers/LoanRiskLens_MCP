@@ -1,6 +1,6 @@
 // Savings Controller
 
-const savingsService = require('../services/savingsService');
+const savingsService = require('@loan-risk-lens/application/services/savings');
 const { validate, createSavingsSchema, userIdSchema } = require('shared/utils/validator');
 const { asyncHandler } = require('../middleware/errorHandler');
 const logger = require('shared/utils/logger');
